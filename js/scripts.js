@@ -6,13 +6,11 @@ function BankAccount(name, deposit, depositAmount, withdrawalAmount){
   this.withdrawalAmount = withdrawalAmount;
 }
 
-BankAccount.prototype.depositMore = function() {
-  return this.deposit + this.depositAmount
+BankAccount.prototype.balance = function() {
+  return this.deposit + this.depositAmount - this.withdrawalAmount;
 }
 
-BankAccount.prototype.withdraw = function() {
-  return this.deposit - this.withdrawalAmount
-}
+
 
 $(document).ready(function(){
   $('#blanks form').submit(function(event){
@@ -24,5 +22,6 @@ $(document).ready(function(){
     var withdrawalAmountInput = parseInt($('input#withdraw-amount').val());
     var newBankAccount = new BankAccount(nameInput, depositInput, depositAmountInput, withdrawalAmountInput)
 
+    $('#balance').append('$' + newBankAccount.balance());
   });
 });
